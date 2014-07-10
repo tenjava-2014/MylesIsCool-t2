@@ -1,0 +1,3 @@
+name: MylesIsCool-t2
+main: com.tenjava.entries.MylesIsCool.t2.TenJava
+version: '${project.version}'
