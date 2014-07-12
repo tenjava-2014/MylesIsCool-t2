@@ -2,3 +2,4 @@ name: LunarLanding
 main: us.myles.tenjava.Plugin
 version: '${project.version}'
 description: Goto the moon...
+author: _MylesC

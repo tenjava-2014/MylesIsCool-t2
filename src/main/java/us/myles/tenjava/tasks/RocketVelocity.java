@@ -14,6 +14,7 @@ public class RocketVelocity implements Runnable {
 
 	private List<Entity> block;
 	private int id;
+	private boolean cancel = false;
 
 	public RocketVelocity(List<Entity> entities) {
 		this.block = entities;
@@ -33,7 +34,7 @@ public class RocketVelocity implements Runnable {
 			Bukkit.getScheduler().cancelTask(this.id);
 			if (block.get(0).getLocation().getY() > 250) {
 				for (Entity e : block) {
-					if (e instanceof Player) {
+					if (e instanceof Player && !cancel) {
 						Player player = (Player) e;
 						player.eject();
 						String r = player.getWorld().getName().equals("moon") ? "world" : "moon";
@@ -47,8 +48,9 @@ public class RocketVelocity implements Runnable {
 			return;
 		}
 		for (Entity e : block) {
-			if (e.getVehicle() == null && e instanceof Player)
-				continue;
+			if (e.getVehicle() == null && e instanceof Player) {
+				cancel = true;
+			}
 			if (e.getLocation().getBlock().getType() != Material.AIR && e.getLocation().getY() < 256) {
 				Bukkit.getScheduler().cancelTask(this.id);
 				e.getWorld().createExplosion(e.getLocation(), 2.5F);
