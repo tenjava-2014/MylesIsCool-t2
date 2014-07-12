@@ -13,6 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -37,6 +39,18 @@ public class MoonEffects implements Listener {
 			event.getEntity().setCustomName(ChatColor.GREEN + "Alien " + name);
 		}
 	}
+
+	@EventHandler
+	public void onPickup(PlayerPickupItemEvent e) {
+		if (e.getItem().getItemStack().getType() == Material.ENDER_STONE) {
+			if (e.getPlayer().getWorld().getName().equals("moon")) {
+				ItemMeta im = e.getItem().getItemStack().getItemMeta();
+				im.setDisplayName("Moonstone");
+				e.getItem().getItemStack().setItemMeta(im);
+			}
+		}
+	}
+	
 	@EventHandler
 	public void onTorch(BlockPlaceEvent event) {
 		if (!event.getPlayer().getWorld().getName().equals("moon"))
