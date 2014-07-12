@@ -20,18 +20,25 @@ public class MeteorPopulator extends BlockPopulator {
 	@Override
 	public void populate(World arg0, Random arg1, Chunk arg2) {
 		Location center = arg2.getBlock(8, arg2.getWorld().getHighestBlockYAt(8, 8), 0).getLocation().add(0, arg1.nextInt(2), 0);
-		if (arg1.nextInt(50) == 1) {
-			int rad = 5 + arg1.nextInt(5);
+		if (arg1.nextInt(100) == 1) {
+			int rad = 2 + arg1.nextInt(5);
 			boolean doLoot = (arg1.nextInt(3) == 1);
 			for (int x = -rad; x <= rad; x++) {
 				for (int y = -rad; y <= rad; y++) {
 					for (int z = -rad; z <= rad; z++) {
 						Location here = center.clone().add(new BlockVector(x, y, z));
 						if (here.distance(center) <= rad + 0.5) {
-							here.getBlock().setType(Material.NETHER_BRICK);
+							if (here.distance(center) <= (rad - 3)) {
+								here.getBlock().setType(Material.LAVA);
+							} else {
+								here.getBlock().setType(Material.NETHER_BRICK);
+							}
+
 						}
-						Block xx = center.getWorld().getHighestBlockAt(center.clone().add(new BlockVector(x, y, z)));
-						xx.setType(Material.FIRE);
+						if (here.distance(center) <= rad + 1.5) {
+							Block xx = center.getWorld().getHighestBlockAt(center.clone().add(new BlockVector(x, y, z)));
+							xx.setType(Material.FIRE);
+						}
 					}
 
 				}
