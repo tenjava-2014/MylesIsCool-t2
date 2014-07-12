@@ -6,9 +6,11 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
@@ -16,6 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import us.myles.tenjava.Plugin;
 import us.myles.tenjava.tasks.GravityEffect;
+import us.myles.tenjava.tasks.TorchBurnout;
 
 public class MoonEffects implements Listener {
 	private Plugin plugin;
@@ -27,15 +30,21 @@ public class MoonEffects implements Listener {
 
 	@EventHandler
 	public void onSpawn(CreatureSpawnEvent event) {
-		if (event.getEntity().getWorld().equals("moon")) {
+		if (event.getLocation().getWorld().getName().equals("moon")) {
 			event.getEntity().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 2));
 			String name = event.getEntity().getType().name().toLowerCase();
 			name = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
 			event.getEntity().setCustomName(ChatColor.GREEN + "Alien " + name);
-			event.getEntity().setCustomNameVisible(true);
 		}
 	}
-
+	@EventHandler
+	public void onTorch(BlockPlaceEvent event) {
+		if (!event.getPlayer().getWorld().getName().equals("moon"))
+			return;
+		if(event.getBlock().getType() == Material.TORCH) {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new TorchBurnout(event.getBlock()), 5L);
+		}
+	}
 	@EventHandler
 	public void onJump(PlayerMoveEvent event) {
 		if (!event.getPlayer().getWorld().getName().equals("moon"))
