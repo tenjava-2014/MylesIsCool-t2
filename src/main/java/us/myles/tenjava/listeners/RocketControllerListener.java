@@ -95,6 +95,7 @@ public class RocketControllerListener implements Listener {
 							e.getView().setProperty(Property.BURN_TIME, 300);
 							e.getView().setProperty(Property.TICKS_FOR_CURRENT_FUEL, 400);
 							fuel.put(e.getViewers().get(0).getName(), fuel.containsKey(e.getViewers().get(0).getName()) ? fuel.get(e.getViewers().get(0).getName()) + 1 : 1);
+							((Player) e.getViewers().get(0)).sendMessage(ChatColor.AQUA + "Fuel loaded, ready to fly!");
 						}
 					}
 				}

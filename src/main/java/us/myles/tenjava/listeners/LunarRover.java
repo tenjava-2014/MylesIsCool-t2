@@ -1,5 +1,6 @@
 package us.myles.tenjava.listeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -37,6 +38,7 @@ public class LunarRover implements Listener {
 				Block target = e.getClickedBlock();
 				Minecart minecart = (Minecart) target.getLocation().getWorld().spawnEntity(target.getLocation().add(0, 2, 0), EntityType.MINECART);
 				minecart.setMetadata("rover", new FixedMetadataValue(plugin, true));
+				e.getPlayer().sendMessage(ChatColor.AQUA + "Rover placed, hop in and take it for a drive.");
 				e.setCancelled(true);
 			}
 		}
@@ -48,13 +50,12 @@ public class LunarRover implements Listener {
 		if (vehicle.getMetadata("rover").size() != 0) {
 			if (vehicle.getPassenger() != null) {
 				Player passenger = (Player) vehicle.getPassenger();
-				// distance to ground
 				Location ground = vehicle.getWorld().getHighestBlockAt(vehicle.getLocation()).getLocation();
-				Vector v = passenger.getLocation().getDirection();
-				if (ground.distance(vehicle.getLocation()) > 2 && v.getY() > 0)
-					v.setY(0);
+				Vector lookingVector = passenger.getLocation().getDirection();
+				if (ground.distance(vehicle.getLocation()) > 2 && lookingVector.getY() > 0)
+					lookingVector.setY(0);
 				vehicle.getWorld().playEffect(vehicle.getLocation(), Effect.SMOKE, 0);
-				vehicle.setVelocity(v);
+				vehicle.setVelocity(lookingVector);
 
 			}
 		}

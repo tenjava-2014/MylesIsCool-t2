@@ -2,20 +2,17 @@ package us.myles.tenjava.populators;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
+import us.myles.tenjava.Util;
 
 public class TentPopulator extends BlockPopulator {
 
@@ -24,7 +21,8 @@ public class TentPopulator extends BlockPopulator {
 		if (arg1.nextInt(40) == 1) {
 			boolean doLoot = (arg1.nextInt(3) == 1);
 			Block base = arg2.getWorld().getHighestBlockAt(arg2.getBlock(0, 0, 0).getLocation()).getLocation().subtract(0, 1, 0).getBlock();
-			if(base.getY() > 32) return;
+			if (base.getY() > 32)
+				return;
 			for (int i = 0; i < 5; i++) {
 				tentBlock(base.getLocation().clone().add(i, 1, 0).getBlock());
 				tentBlock(base.getLocation().clone().add(i, 1, 0).getBlock());
@@ -63,20 +61,9 @@ public class TentPopulator extends BlockPopulator {
 			chosen.add(is[new SecureRandom().nextInt(is.length)]);
 		}
 		if (new SecureRandom().nextBoolean()) {
-			chosen.add(getRandomArmour());
+			chosen.add(Util.getRandomArmour());
 		}
 		return chosen.toArray(new ItemStack[0]);
-	}
-
-	private ItemStack getRandomArmour() {
-		Material[] t = new Material[] { Material.LEATHER_BOOTS, Material.LEATHER_HELMET, Material.LEATHER_CHESTPLATE, Material.LEATHER_LEGGINGS };
-		ItemStack is = new ItemStack(t[new Random().nextInt(t.length)]);
-		LeatherArmorMeta laMeta = (LeatherArmorMeta) is.getItemMeta();
-		laMeta.setDisplayName(ChatColor.GOLD + "Lunar Armour");
-		laMeta.setLore(Arrays.asList("Reduces Gravity on the moon per piece"));
-		laMeta.setColor(Color.YELLOW);
-		is.setItemMeta(laMeta);
-		return is;
 	}
 
 }

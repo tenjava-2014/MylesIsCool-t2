@@ -3,6 +3,7 @@ package us.myles.tenjava.tasks;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -38,7 +39,7 @@ public class RocketVelocity implements Runnable {
 						Player player = (Player) e;
 						player.eject();
 						String r = player.getWorld().getName().equals("moon") ? "Normal World" : "Moon";
-						player.sendMessage("You are entering the " + r + ".");
+						player.sendMessage(ChatColor.AQUA + "You are entering the " + r + ".");
 						player.teleport((player.getWorld().getName().equals("moon") ? Bukkit.getWorlds().get(0) : Bukkit.getWorld("moon")).getHighestBlockAt((int) player.getLocation().getX(),
 								(int) player.getLocation().getZ()).getLocation().add(0, 10, 0), TeleportCause.COMMAND);
 
