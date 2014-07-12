@@ -23,19 +23,9 @@ Maven will download all required dependencies and build a ready-for-use plugin p
 
 ---------------------------------------
 
-Usage
------
-
-1. Install plugin
-2. Do things with it
-
-<!-- Hi, MylesIsCool! This is the default README for every ten.java submission. -->
-<!-- We encourage you to edit this README with some information about your submission – keep in mind you'll be scored on documentation! -->
-
-
 How to use the Plugin
 ----
-- Download the jar from the CI or compile it yourself.
+- Download the jar from the [Build Server](http://ci.tenjava.com/job/MylesIsCool-t2/lastStableBuild/) or compile it yourself.
 - Put jar in your plugins directory
 
 How to goto the moon
