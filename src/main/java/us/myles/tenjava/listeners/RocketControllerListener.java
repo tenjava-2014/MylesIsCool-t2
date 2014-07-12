@@ -50,7 +50,7 @@ public class RocketControllerListener implements Listener {
 					ItemStack destroy = new ItemStack(Material.REDSTONE);
 					ItemMeta destroyMeta = launch.getItemMeta();
 					destroyMeta.setDisplayName(ChatColor.DARK_RED + "Destroy Rocket");
-					destroy.setItemMeta(launchMeta);
+					destroy.setItemMeta(destroyMeta);
 					i.setItem(4, destroy);
 					lastRocket.put(e.getPlayer().getName(), me.getLocation());
 					e.getPlayer().openInventory(i);

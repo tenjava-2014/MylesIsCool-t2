@@ -25,9 +25,9 @@ public class GravityEffect implements Runnable {
 
 	@Override
 	public void run() {
-		int c = countLunarArmour(player);
+		int c = countLunarArmour(player) + 1;
 		if (tick < (20 / c)) {
-			player.setVelocity(new Vector(0, (0.3 - (tick == 0 ? 0 : (tick / 100))) / (c + 1), 0));
+			player.setVelocity(new Vector(0, (0.3 - (tick == 0 ? 0 : (tick / 100))) / c, 0));
 		}
 		if (tick > 50) {
 			Bukkit.getScheduler().cancelTask(id);
