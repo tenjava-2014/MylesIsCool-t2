@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.util.noise.SimplexOctaveGenerator;
 
 import us.myles.tenjava.populators.CraterPopulator;
 
@@ -28,21 +29,30 @@ public class MoonGenerator extends ChunkGenerator {
 	public byte[] generate(World world, Random random, int chunkX, int chunkZ) {
 		// 16 * 16 * 256 / 2 = 32768;
 		// NoiseGenerator noiseGenerator = new SimplexNoiseGenerator(world);
+		SimplexOctaveGenerator generator = new SimplexOctaveGenerator(world, 8);
+		generator.setScale(1D / 64D);
+		byte[] blocks = new byte[32768];
 
-		byte[] blocks = new byte[65536 / 2];
-		for (int y = 0; y < 256; y++) {
-			for (int x = 0; x < 16; x++) {
-				for (int z = 0; z < 16; z++) {
-					// 0 -> 16 -8 -> 8
-					// 0 -> 16 16
-					int height = (int) (((Math.abs(Math.sin((x - 8) * 5)) + Math.abs(Math.sin((z - 8) * 5))) * 100D) - 90) / 10 + 10;
-
-					if (y < height) {
+		for (int x = 0; x < 16; x++) {
+			for (int z = 0; z < 16; z++) {
+				int realX = (16 * chunkX) + x;
+				int realZ = (16 * chunkZ) + z;
+				double height = generator.noise(realX, realZ, 0.5, 0.5) * 16;
+				if (height > 128) {
+					height = 128;
+				}
+				if (height <= 0) {
+					height = 1;
+				}
+				for (int y = 0; y < height + 32; y++) {
+					if (height == 0)
+						blocks[combineXYZ(x, y, z)] = (byte) Material.BEDROCK.getId();
+					else
 						blocks[combineXYZ(x, y, z)] = (byte) Material.ENDER_STONE.getId();
-					}
 				}
 			}
 		}
+
 		return blocks;
 	}
 
