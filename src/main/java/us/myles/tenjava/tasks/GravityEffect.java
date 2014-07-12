@@ -33,6 +33,7 @@ public class GravityEffect implements Runnable {
 			Bukkit.getScheduler().cancelTask(id);
 			MoonEffects.removePlayer(player);
 		}
+		player.setFallDistance(0f);
 		tick++;
 	}
 
