@@ -45,20 +45,21 @@ public class MoonEffects implements Listener {
 		if (e.getItem().getItemStack().getType() == Material.ENDER_STONE) {
 			if (e.getPlayer().getWorld().getName().equals("moon")) {
 				ItemMeta im = e.getItem().getItemStack().getItemMeta();
-				im.setDisplayName("Moonstone");
+				im.setDisplayName(ChatColor.RESET + "" + ChatColor.GOLD + "Moonstone");
 				e.getItem().getItemStack().setItemMeta(im);
 			}
 		}
 	}
-	
+
 	@EventHandler
 	public void onTorch(BlockPlaceEvent event) {
 		if (!event.getPlayer().getWorld().getName().equals("moon"))
 			return;
-		if(event.getBlock().getType() == Material.TORCH) {
+		if (event.getBlock().getType() == Material.TORCH) {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new TorchBurnout(event.getBlock()), 5L);
 		}
 	}
+
 	@EventHandler
 	public void onJump(PlayerMoveEvent event) {
 		if (!event.getPlayer().getWorld().getName().equals("moon"))
