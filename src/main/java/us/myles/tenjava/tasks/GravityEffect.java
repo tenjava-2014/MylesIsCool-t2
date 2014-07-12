@@ -22,10 +22,10 @@ public class GravityEffect implements Runnable {
 
 	@Override
 	public void run() {
-		if (tick < 40) {
-			player.setVelocity(new Vector(0, 0.5, 0));
+		if (tick < 20) {
+			player.setVelocity(new Vector(0, 0.3 - (tick == 0 ? 0 : (tick / 100)), 0));
 		}
-		if (tick > 200) {
+		if (tick > 50) {
 			Bukkit.getScheduler().cancelTask(id);
 			MoonEffects.removePlayer(player);
 		}

@@ -22,6 +22,8 @@ public class MoonEffects implements Listener {
 
 	@EventHandler
 	public void onJump(PlayerMoveEvent event) {
+		if (!event.getPlayer().getWorld().getName().equals("moon"))
+			return;
 		if (event.getFrom().getY() < event.getTo().getY()) {
 			if (jumpMap.contains(event.getPlayer().getName())) {
 				return;
