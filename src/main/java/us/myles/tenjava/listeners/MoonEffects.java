@@ -14,6 +14,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -33,6 +34,8 @@ public class MoonEffects implements Listener {
 	@EventHandler
 	public void onSpawn(CreatureSpawnEvent event) {
 		if (event.getLocation().getWorld().getName().equals("moon")) {
+			event.getEntity().getEquipment().setHelmet(new ItemStack(Material.GLASS));
+			event.getEntity().getEquipment().setHelmetDropChance(0f);
 			event.getEntity().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 2));
 			String name = event.getEntity().getType().name().toLowerCase();
 			name = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());

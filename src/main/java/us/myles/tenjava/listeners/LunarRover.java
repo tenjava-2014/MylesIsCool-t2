@@ -35,7 +35,7 @@ public class LunarRover implements Listener {
 			if (e.getItem().getType() == Material.MINECART) {
 				e.getPlayer().getInventory().remove(e.getItem());
 				Block target = e.getClickedBlock();
-				Minecart minecart = (Minecart) target.getLocation().getWorld().spawnEntity(target.getLocation().add(0, 2, 0), EntityType.MINECART);
+				Minecart minecart = (Minecart) target.getLocation().getWorld().spawnEntity(target.getLocation().add(0, 2, 0), EntityType.MINECART_FURNACE);
 				minecart.setMetadata("rover", new FixedMetadataValue(plugin, true));
 				e.setCancelled(true);
 			}
