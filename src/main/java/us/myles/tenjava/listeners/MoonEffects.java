@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,12 +24,18 @@ public class MoonEffects implements Listener {
 	public MoonEffects(Plugin plugin) {
 		this.plugin = plugin;
 	}
+
 	@EventHandler
 	public void onSpawn(CreatureSpawnEvent event) {
-		if(event.getEntity().getWorld().equals("moon")) {
+		if (event.getEntity().getWorld().equals("moon")) {
 			event.getEntity().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 2));
+			String name = event.getEntity().getType().name().toLowerCase();
+			name = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
+			event.getEntity().setCustomName(ChatColor.GREEN + "Alien " + name);
+			event.getEntity().setCustomNameVisible(true);
 		}
 	}
+
 	@EventHandler
 	public void onJump(PlayerMoveEvent event) {
 		if (!event.getPlayer().getWorld().getName().equals("moon"))
@@ -39,7 +46,8 @@ public class MoonEffects implements Listener {
 			if (jumpMap.contains(event.getPlayer().getName())) {
 				return;
 			}
-			if(event.getPlayer().getGameMode() == GameMode.CREATIVE) return;
+			if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
+				return;
 			GravityEffect gravity = new GravityEffect(event.getPlayer());
 			int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, gravity, 1L, 1L);
 			gravity.setTaskID(id);

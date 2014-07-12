@@ -25,8 +25,8 @@ public class GravityEffect implements Runnable {
 
 	@Override
 	public void run() {
-		if (tick < 20) {
-			int c = countLunarArmour(player);
+		int c = countLunarArmour(player);
+		if (tick < (20 / c)) {
 			player.setVelocity(new Vector(0, (0.3 - (tick == 0 ? 0 : (tick / 100))) / (c + 1), 0));
 		}
 		if (tick > 50) {

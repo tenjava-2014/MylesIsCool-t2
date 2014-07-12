@@ -9,6 +9,7 @@ import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.ItemStack;
@@ -28,17 +29,17 @@ public class CraterPopulator extends BlockPopulator {
 					for (int z = -rad; z <= rad; z++) {
 						Location here = center.clone().add(new BlockVector(x, y, z));
 						if (here.distance(center) <= rad + 0.5) {
-							if (doLoot && here.distance(center) < 1) {
-								here.getBlock().setType(Material.CHEST);
-								Chest chest = (Chest) here.getBlock().getState();
-								chest.getBlockInventory().addItem(getRandomItems());
-								doLoot = false;
-							} else {
-								here.getBlock().setType(Material.AIR);
-							}
+							here.getBlock().setType(Material.AIR);
 						}
 					}
 				}
+			}
+			if (doLoot) {
+				Block where = center.getWorld().getHighestBlockAt(center);
+				where.setType(Material.CHEST);
+				Chest chest = (Chest) where.getState();
+				chest.getBlockInventory().addItem(getRandomItems());
+				doLoot = false;
 			}
 		}
 	}
