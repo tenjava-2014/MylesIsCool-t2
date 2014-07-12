@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -20,6 +21,14 @@ public class RocketVelocity implements Runnable {
 
 	@Override
 	public void run() {
+		for (Entity e : block) {
+			if (e instanceof Player) {
+				if (e.getLocation().getY() > 300) {
+					Bukkit.getScheduler().cancelTask(this.id);
+					return;
+				}
+			}
+		}
 		if (block.get(0).isDead()) {
 			Bukkit.getScheduler().cancelTask(this.id);
 			if (block.get(0).getLocation().getY() > 250) {
@@ -36,8 +45,16 @@ public class RocketVelocity implements Runnable {
 			}
 			return;
 		}
-		for (Entity e : block)
+		for (Entity e : block) {
+			if (e.getVehicle() == null && e instanceof Player)
+				continue;
+			if (e.getLocation().getBlock().getType() != Material.AIR) {
+				Bukkit.getScheduler().cancelTask(this.id);
+				e.getWorld().createExplosion(e.getLocation(), 2.5F);
+				return;
+			}
 			e.setVelocity(new Vector(0, 2L, 0));
+		}
 		block.get(0).getWorld().playEffect(block.get(0).getLocation(), Effect.MOBSPAWNER_FLAMES, 0);
 	}
 
