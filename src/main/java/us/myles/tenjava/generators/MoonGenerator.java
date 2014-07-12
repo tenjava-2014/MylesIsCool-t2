@@ -12,6 +12,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.util.noise.SimplexOctaveGenerator;
 
 import us.myles.tenjava.populators.CraterPopulator;
+import us.myles.tenjava.populators.TentPopulator;
 
 public class MoonGenerator extends ChunkGenerator {
 
@@ -58,7 +59,7 @@ public class MoonGenerator extends ChunkGenerator {
 
 	@Override
 	public List<BlockPopulator> getDefaultPopulators(World world) {
-		return Arrays.asList((BlockPopulator) new CraterPopulator());
+		return Arrays.asList((BlockPopulator) new CraterPopulator(), new TentPopulator());
 	}
 
 	@Override

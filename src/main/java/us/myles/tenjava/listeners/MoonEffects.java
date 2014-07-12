@@ -10,8 +10,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
@@ -44,6 +46,17 @@ public class MoonEffects implements Listener {
 	}
 
 	@EventHandler
+	public void onLight(PlayerInteractEvent e) {
+		if (e.getItem() != null) {
+			if (e.getPlayer().getWorld().getName().equals("moon")) {
+				if (e.getItem().getType() == Material.FLINT_AND_STEEL || e.getItem().getType() == Material.FIREWORK_CHARGE) {
+					e.setCancelled(true);
+				}
+			}
+		}
+	}
+
+	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e) {
 		if (e.getItem().getItemStack().getType() == Material.ENDER_STONE) {
 			if (e.getPlayer().getWorld().getName().equals("moon")) {
@@ -61,6 +74,13 @@ public class MoonEffects implements Listener {
 		if (event.getBlock().getType() == Material.TORCH) {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new TorchBurnout(event.getBlock()), 5L);
 		}
+	}
+
+	@EventHandler
+	public void onBurn(BlockBurnEvent event) {
+		if (!event.getBlock().getWorld().getName().equals("moon"))
+			return;
+		event.setCancelled(true);
 	}
 
 	@EventHandler
