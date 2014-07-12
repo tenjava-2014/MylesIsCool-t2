@@ -30,7 +30,9 @@ public class CraterPopulator extends BlockPopulator {
 					for (int z = -rad; z <= rad; z++) {
 						Location here = center.clone().add(new BlockVector(x, y, z));
 						if (here.distance(center) <= rad + 0.5) {
-							here.getBlock().setType(isIcePool ? Material.ICE : Material.AIR);
+							if (here.getBlock().getType() != Material.AIR) {
+								here.getBlock().setType(isIcePool ? Material.ICE : Material.AIR);
+							}
 						}
 					}
 				}
