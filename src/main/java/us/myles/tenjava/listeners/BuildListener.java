@@ -28,6 +28,7 @@ public class BuildListener implements Listener {
 	}
 
 	@SuppressWarnings("deprecation")
+	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if (e.getClickedBlock().getType() == Material.FURNACE) {
