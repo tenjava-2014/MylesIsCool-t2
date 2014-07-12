@@ -68,4 +68,4 @@ Things you should try
 - Do some moon rover racing with a friend!
 - Get out a rocket before you go to the moon and try to survive!
 - Crash a rocket.
-- Get a full set of lunar armour!
+- Get a full set of lunar armour and wear it in the overworld :)!
