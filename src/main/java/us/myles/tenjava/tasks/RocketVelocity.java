@@ -26,9 +26,10 @@ public class RocketVelocity implements Runnable {
 				for (Entity e : block) {
 					if (e instanceof Player) {
 						Player player = (Player) e;
+						player.eject();
 						String r = player.getWorld().getName().equals("moon") ? "world" : "moon";
 						player.sendMessage("You are entering the " + r + " realm.");
-						player.teleport(Bukkit.getWorld(r).getSpawnLocation(), TeleportCause.COMMAND);
+						player.teleport((player.getWorld().getName().equals("moon") ? Bukkit.getWorlds().get(0) : Bukkit.getWorld("moon")).getSpawnLocation(), TeleportCause.COMMAND);
 					}
 				}
 			}
