@@ -46,7 +46,12 @@ public class RocketControllerListener implements Listener {
 					ItemMeta launchMeta = launch.getItemMeta();
 					launchMeta.setDisplayName(ChatColor.GREEN + "Launch Rocket");
 					launch.setItemMeta(launchMeta);
-					i.addItem(launch);
+					i.setItem(0, launch);
+					ItemStack destroy = new ItemStack(Material.REDSTONE);
+					ItemMeta destroyMeta = launch.getItemMeta();
+					destroyMeta.setDisplayName(ChatColor.DARK_RED + "Destroy Rocket");
+					destroy.setItemMeta(launchMeta);
+					i.setItem(4, destroy);
 					lastRocket.put(e.getPlayer().getName(), me.getLocation());
 					e.getPlayer().openInventory(i);
 					e.setCancelled(true);
@@ -62,16 +67,31 @@ public class RocketControllerListener implements Listener {
 			int clicked = e.getRawSlot();
 			if (clicked == 0) {
 				if (lastRocket.containsKey(e.getViewers().get(0).getName())) {
-					Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-						@Override
-						public void run() {
-							e.getViewers().get(0).closeInventory();
-						}
-
-					});
+					closeInv(e.getViewers().get(0));
 					launchRocket(lastRocket.get(e.getViewers().get(0).getName()).getBlock(), e.getViewers().get(0));
 				}
 			}
+			if (clicked == 4) {
+				closeInv(e.getViewers().get(0));
+				destroyRocket(lastRocket.get(e.getViewers().get(0).getName()).getBlock(), e.getViewers().get(0));
+			}
+		}
+	}
+
+	private void closeInv(final HumanEntity humanEntity) {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+			@Override
+			public void run() {
+				humanEntity.closeInventory();
+			}
+		});
+	}
+
+	public void destroyRocket(Block furnace, HumanEntity launcher) {
+		if (furnace.getRelative(BlockFace.UP).getType() == Material.WOOL && furnace.getRelative(BlockFace.DOWN).getType() == Material.WOOL) {
+			furnace.breakNaturally();
+			furnace.getRelative(BlockFace.UP).breakNaturally();
+			furnace.getRelative(BlockFace.DOWN).breakNaturally();
 		}
 	}
 
