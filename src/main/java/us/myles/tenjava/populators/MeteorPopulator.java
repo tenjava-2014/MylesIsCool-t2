@@ -30,9 +30,10 @@ public class MeteorPopulator extends BlockPopulator {
 						if (here.distance(center) <= rad + 0.5) {
 							here.getBlock().setType(Material.NETHER_BRICK);
 						}
+						Block xx = center.getWorld().getHighestBlockAt(center.clone().add(new BlockVector(x, y, z)));
+						xx.setType(Material.FIRE);
 					}
-					Block here = center.getWorld().getHighestBlockAt(center.clone().add(new BlockVector(x, y, 0)));
-					here.setType(Material.FIRE);
+
 				}
 			}
 			if (doLoot) {
@@ -47,7 +48,7 @@ public class MeteorPopulator extends BlockPopulator {
 
 	private ItemStack[] getLoot() {
 		ItemStack[] is = new ItemStack[] { new ItemStack(Material.NETHER_BRICK, 10), new ItemStack(Material.GOLD_INGOT, 5), new ItemStack(Material.BONE, 3), new ItemStack(Material.MINECART, 1),
-				new ItemStack(Material.APPLE, 5), new ItemStack(Material.WOOD, 3), new ItemStack(Material.COBBLESTONE, 4) , new ItemStack(Material.REDSTONE_BLOCK, 4)};
+				new ItemStack(Material.APPLE, 5), new ItemStack(Material.WOOD, 3), new ItemStack(Material.COBBLESTONE, 4), new ItemStack(Material.REDSTONE_BLOCK, 4) };
 		List<ItemStack> chosen = new ArrayList<ItemStack>();
 		for (int i = 0; i < new Random().nextInt(10) + 1; i++) {
 			chosen.add(is[new SecureRandom().nextInt(is.length)]);
