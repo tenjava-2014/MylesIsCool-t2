@@ -42,6 +42,7 @@ How to goto the moon
 ----
 - Build a rocket by placing a furnace on top of any colour wool and then place a piece of wool on top of that.
 - Open the rocket GUI by right clicking the furnace, if you built it right then you will have the Rocket Control Panel open.
+- Put 1 piece of coal in the fuel slot and the burn indicator should turn on.
 - Click launch and then watch yourself fly to the moon
 
 
@@ -55,10 +56,26 @@ Placing a Minecart on the moon causes it to be a hovering lunar rover, these are
 Things which are different on the moon
 ----
 - It's always night!
+- Build flags by placing wool on 2 fence posts!
 - Mobs wear helmets and are labelled Aliens!
 - Jumping mechanics are different!
+- Find lunar armour which reduces the gravitation effect!
 - The surface is hilly with crators everywhere, sometimes there is loot in the crators.
 - You collect Moonstone!
 - Torches don't work as there is not enough oxygen!
 - Lunar Armour can be found and worn to reduce gravity impact.
+- Meteors everywhere!
+- Lots of loot!
+- Fire doesn't burn, so perfect for wooden houses!
+- Ice pools as well as abandoned tents!
 - You start to wonder why you ever came to the moon...
+
+
+Things you should try
+----
+- Play survival in the moon and try get back to the overworld without a rocket!
+- Dig into a meteor to find goodness!
+- Do some moon rover racing with a friend!
+- Get out a rocket before you go to the moon and try to survive!
+- Crash a rocket.
+- Get a full set of lunar armour!

@@ -37,8 +37,8 @@ public class RocketVelocity implements Runnable {
 					if (e instanceof Player && !cancel) {
 						Player player = (Player) e;
 						player.eject();
-						String r = player.getWorld().getName().equals("moon") ? "world" : "moon";
-						player.sendMessage("You are entering the " + r + " realm.");
+						String r = player.getWorld().getName().equals("moon") ? "Normal World" : "Moon";
+						player.sendMessage("You are entering the " + r + ".");
 						player.teleport((player.getWorld().getName().equals("moon") ? Bukkit.getWorlds().get(0) : Bukkit.getWorld("moon")).getHighestBlockAt((int) player.getLocation().getX(),
 								(int) player.getLocation().getZ()).getLocation().add(0, 10, 0), TeleportCause.COMMAND);
 
@@ -47,16 +47,16 @@ public class RocketVelocity implements Runnable {
 			}
 			return;
 		}
-		for (Entity e : block) {
-			if (e.getVehicle() == null && e instanceof Player) {
+		for (Entity entity : block) {
+			if (entity.getVehicle() == null && entity instanceof Player) {
 				cancel = true;
 			}
-			if (e.getLocation().getBlock().getType() != Material.AIR && e.getLocation().getY() < 256) {
+			if (entity.getLocation().getBlock().getType() != Material.AIR && entity.getLocation().getY() < 256) {
 				Bukkit.getScheduler().cancelTask(this.id);
-				e.getWorld().createExplosion(e.getLocation(), 2.5F);
+				entity.getWorld().createExplosion(entity.getLocation(), 2.5F);
 				return;
 			}
-			e.setVelocity(new Vector(0, 2L, 0));
+			entity.setVelocity(new Vector(0, 2L, 0));
 		}
 		block.get(0).getWorld().playEffect(block.get(0).getLocation(), Effect.MOBSPAWNER_FLAMES, 0);
 	}
