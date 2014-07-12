@@ -27,6 +27,8 @@ public class LunarRover implements Listener {
 
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
+		if (!e.getPlayer().getWorld().getName().equals("moon"))
+			return;
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if (e.getItem() == null)
 				return;
