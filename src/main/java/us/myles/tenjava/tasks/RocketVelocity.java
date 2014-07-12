@@ -21,7 +21,7 @@ public class RocketVelocity implements Runnable {
 	public void run() {
 		if (block.get(0).isDead()) {
 			Bukkit.getScheduler().cancelTask(this.id);
-			if (block.get(0).getLocation().getX() > 250) {
+			if (block.get(0).getLocation().getY() > 250) {
 				for (Entity e : block) {
 					if (e instanceof Player) {
 						Player player = (Player) e;
