@@ -22,8 +22,9 @@ public class TentPopulator extends BlockPopulator {
 	@Override
 	public void populate(World arg0, Random arg1, Chunk arg2) {
 		if (arg1.nextInt(40) == 1) {
-			boolean doLoot = (arg1.nextInt(10) == 1);
+			boolean doLoot = (arg1.nextInt(3) == 1);
 			Block base = arg2.getWorld().getHighestBlockAt(arg2.getBlock(0, 0, 0).getLocation()).getLocation().subtract(0, 1, 0).getBlock();
+			if(base.getY() > 32) return;
 			for (int i = 0; i < 5; i++) {
 				tentBlock(base.getLocation().clone().add(i, 1, 0).getBlock());
 				tentBlock(base.getLocation().clone().add(i, 1, 0).getBlock());
