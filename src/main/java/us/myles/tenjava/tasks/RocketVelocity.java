@@ -39,7 +39,8 @@ public class RocketVelocity implements Runnable {
 						String r = player.getWorld().getName().equals("moon") ? "world" : "moon";
 						player.sendMessage("You are entering the " + r + " realm.");
 						player.teleport((player.getWorld().getName().equals("moon") ? Bukkit.getWorlds().get(0) : Bukkit.getWorld("moon")).getHighestBlockAt((int) player.getLocation().getX(),
-								(int) player.getLocation().getZ()).getLocation(), TeleportCause.COMMAND);
+								(int) player.getLocation().getZ()).getLocation().add(0, 10, 0), TeleportCause.COMMAND);
+
 					}
 				}
 			}
@@ -48,7 +49,7 @@ public class RocketVelocity implements Runnable {
 		for (Entity e : block) {
 			if (e.getVehicle() == null && e instanceof Player)
 				continue;
-			if (e.getLocation().getBlock().getType() != Material.AIR) {
+			if (e.getLocation().getBlock().getType() != Material.AIR && e.getLocation().getY() < 256) {
 				Bukkit.getScheduler().cancelTask(this.id);
 				e.getWorld().createExplosion(e.getLocation(), 2.5F);
 				return;
