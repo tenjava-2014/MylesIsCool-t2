@@ -45,7 +45,7 @@ public class MoonGenerator extends ChunkGenerator {
 					height = 1;
 				}
 				for (int y = 0; y < height + 32; y++) {
-					if (height == 0)
+					if (y == 0)
 						blocks[combineXYZ(x, y, z)] = (byte) Material.BEDROCK.getId();
 					else
 						blocks[combineXYZ(x, y, z)] = (byte) Material.ENDER_STONE.getId();
