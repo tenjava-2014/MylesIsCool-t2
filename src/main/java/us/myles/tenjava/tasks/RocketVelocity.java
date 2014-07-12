@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.util.Vector;
 
 public class RocketVelocity implements Runnable {
@@ -26,7 +27,7 @@ public class RocketVelocity implements Runnable {
 					if (e instanceof Player) {
 						Player player = (Player) e;
 						player.sendMessage("You are entering the moon realm.");
-						player.teleport(Bukkit.getWorld("moon").getSpawnLocation());
+						player.teleport(Bukkit.getWorld("moon").getSpawnLocation(), TeleportCause.COMMAND);
 					}
 				}
 			}
