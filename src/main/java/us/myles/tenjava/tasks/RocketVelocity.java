@@ -23,9 +23,9 @@ public class RocketVelocity implements Runnable {
 
 	@Override
 	public void run() {
-		for (Entity e : block) {
-			if (e instanceof Player) {
-				if (e.getLocation().getY() > 300) {
+		for (Entity entity : block) {
+			if (entity instanceof Player) {
+				if (entity.getLocation().getY() > 300) {
 					Bukkit.getScheduler().cancelTask(this.id);
 					return;
 				}
@@ -34,15 +34,14 @@ public class RocketVelocity implements Runnable {
 		if (block.get(0).isDead()) {
 			Bukkit.getScheduler().cancelTask(this.id);
 			if (block.get(0).getLocation().getY() > 250) {
-				for (Entity e : block) {
-					if (e instanceof Player && !cancel) {
-						Player player = (Player) e;
+				for (Entity entity : block) {
+					if (entity instanceof Player && !cancel) {
+						Player player = (Player) entity;
 						player.eject();
 						String r = player.getWorld().getName().equals("moon") ? "Normal World" : "Moon";
 						player.sendMessage(ChatColor.AQUA + "You are entering the " + r + ".");
 						player.teleport((player.getWorld().getName().equals("moon") ? Bukkit.getWorlds().get(0) : Bukkit.getWorld("moon")).getHighestBlockAt((int) player.getLocation().getX(),
 								(int) player.getLocation().getZ()).getLocation().add(0, 10, 0), TeleportCause.COMMAND);
-
 					}
 				}
 			}

@@ -25,7 +25,6 @@ public class TentPopulator extends BlockPopulator {
 				return;
 			for (int i = 0; i < 5; i++) {
 				tentBlock(base.getLocation().clone().add(i, 1, 0).getBlock());
-				tentBlock(base.getLocation().clone().add(i, 1, 0).getBlock());
 				tentBlock(base.getLocation().clone().add(i, 2, 1).getBlock());
 				tentBlock(base.getLocation().clone().add(i, 3, 2).getBlock());
 				tentBlock(base.getLocation().clone().add(i, 2, 3).getBlock());
