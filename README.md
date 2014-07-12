@@ -30,18 +30,23 @@ How to use the Plugin
 
 How to goto the moon
 ----
+[![Build](http://i.imgur.com/Zzb874H.png)]
 - Build a rocket by placing a furnace on top of any colour wool and then place a piece of wool on top of that.
 - Open the rocket GUI by right clicking the furnace, if you built it right then you will have the Rocket Control Panel open.
 - Put 1 piece of coal in the fuel slot and the burn indicator should turn on.
 - Click launch and then watch yourself fly to the moon
 
+[![Build](http://i.imgur.com/JmJ0VVq.png)]
 
 - Note: We suggest taking more materials to the moon so you can get a rocket back!
+
 
 
 Lunar Rovers
 ----
 Placing a Minecart on the moon causes it to be a hovering lunar rover, these are the best transport on the moon. Be careful as the moon is always night mobs will shoot at your rover!
+
+[![Me in a lunar rover](http://i.imgur.com/fIOZ9eZ.png)]
 
 Things which are different on the moon
 ----
@@ -69,3 +74,5 @@ Things you should try
 - Get out a rocket before you go to the moon and try to survive!
 - Crash a rocket.
 - Get a full set of lunar armour and wear it in the overworld :)!
+ 
+[![Zombie](http://i.imgur.com/tbhI89X.png)]
