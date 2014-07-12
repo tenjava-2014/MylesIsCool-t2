@@ -85,7 +85,7 @@ public class RocketControllerListener implements Listener {
 				if (e.getAction() == InventoryAction.PLACE_ALL || e.getAction() == InventoryAction.PLACE_ONE || e.getAction() == InventoryAction.PLACE_SOME) {
 					if (e.getCursor() != null) {
 						if (e.getCursor().getType() == Material.COAL) {
-							if (e.getCursor().getAmount() != 1) {
+							if (e.getCursor().getAmount() != 1 || fuel.containsKey(e.getViewers().get(0).getName())) {
 								e.setCancelled(true);
 								return;
 							}
