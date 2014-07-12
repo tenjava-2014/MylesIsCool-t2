@@ -16,7 +16,7 @@ public class OverworldArmour implements Runnable {
 				continue;
 			int c = Util.countLunarArmour(p);
 			if (c == 4) {
-				p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 2, 3 * 10));
+				p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10 * 20, 1));
 			}
 		}
 	}

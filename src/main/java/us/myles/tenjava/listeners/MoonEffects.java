@@ -1,7 +1,10 @@
 package us.myles.tenjava.listeners;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,6 +14,7 @@ import org.bukkit.FireworkEffect.Type;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -49,6 +53,10 @@ public class MoonEffects implements Listener {
 			String name = event.getEntity().getType().name().toLowerCase();
 			name = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
 			event.getEntity().setCustomName(ChatColor.GREEN + "Alien " + name);
+			if (event.getEntity() instanceof Enderman && new SecureRandom().nextInt(10) == 1) {
+				Enderman enderman = (Enderman) event.getEntity();
+				enderman.getEquipment().setItemInHand(new ItemStack(Material.FURNACE));
+			}
 		}
 	}
 

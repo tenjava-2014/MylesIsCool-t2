@@ -87,6 +87,11 @@ public class RocketControllerListener implements Listener {
 						if (e.getCursor().getType() == Material.COAL) {
 							if (e.getCursor().getAmount() != 1 || fuel.containsKey(e.getViewers().get(0).getName())) {
 								e.setCancelled(true);
+								if(e.getCursor().getAmount() != 1) {
+									((Player) e.getViewers().get(0)).sendMessage(ChatColor.RED + "Please put 1 coal in at once.");
+								}else {
+									((Player) e.getViewers().get(0)).sendMessage(ChatColor.RED + "There is already fuel in this rocket.");
+								}
 								return;
 							}
 							e.setCursor(null);
