@@ -12,6 +12,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.util.noise.SimplexOctaveGenerator;
 
 import us.myles.tenjava.populators.CraterPopulator;
+import us.myles.tenjava.populators.MeteorPopulator;
 import us.myles.tenjava.populators.TentPopulator;
 
 public class MoonGenerator extends ChunkGenerator {
@@ -28,8 +29,6 @@ public class MoonGenerator extends ChunkGenerator {
 	@SuppressWarnings("deprecation")
 	@Override
 	public byte[] generate(World world, Random random, int chunkX, int chunkZ) {
-		// 16 * 16 * 256 / 2 = 32768;
-		// NoiseGenerator noiseGenerator = new SimplexNoiseGenerator(world);
 		SimplexOctaveGenerator generator = new SimplexOctaveGenerator(world, 8);
 		generator.setScale(1D / 64D);
 		byte[] blocks = new byte[32768];
@@ -59,7 +58,7 @@ public class MoonGenerator extends ChunkGenerator {
 
 	@Override
 	public List<BlockPopulator> getDefaultPopulators(World world) {
-		return Arrays.asList((BlockPopulator) new CraterPopulator(), new TentPopulator());
+		return Arrays.asList((BlockPopulator) new CraterPopulator(), new TentPopulator(), new MeteorPopulator());
 	}
 
 	@Override

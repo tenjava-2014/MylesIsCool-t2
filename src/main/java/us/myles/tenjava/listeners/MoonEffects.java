@@ -5,8 +5,14 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.FireworkEffect.Type;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +23,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -73,6 +80,16 @@ public class MoonEffects implements Listener {
 			return;
 		if (event.getBlock().getType() == Material.TORCH) {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new TorchBurnout(event.getBlock()), 5L);
+		}
+		if (event.getBlock().getType() == Material.WOOL) {
+			if (event.getBlock().getRelative(BlockFace.DOWN).getType() == Material.FENCE && event.getBlock().getRelative(BlockFace.DOWN).getRelative(BlockFace.DOWN).getType() == Material.FENCE) {
+				Firework fw = (Firework) event.getBlock().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.FIREWORK);
+				FireworkMeta fMeta = fw.getFireworkMeta();
+				FireworkEffect effect = FireworkEffect.builder().flicker(false).with(Type.BALL_LARGE).trail(true).withColor(Color.RED).build();
+				fMeta.addEffect(effect);
+				fMeta.setPower(3);
+				fw.setFireworkMeta(fMeta);
+			}
 		}
 	}
 
