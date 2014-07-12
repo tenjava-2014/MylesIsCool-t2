@@ -85,17 +85,24 @@ public class RocketControllerListener implements Listener {
 				if (e.getAction() == InventoryAction.PLACE_ALL || e.getAction() == InventoryAction.PLACE_ONE || e.getAction() == InventoryAction.PLACE_SOME) {
 					if (e.getCursor() != null) {
 						if (e.getCursor().getType() == Material.COAL) {
-							if (e.getCursor().getAmount() != 1 || fuel.containsKey(e.getViewers().get(0).getName())) {
+							if (e.getCursor().getAmount() != 1 && e.getAction() != InventoryAction.PLACE_ONE || fuel.containsKey(e.getViewers().get(0).getName())) {
 								e.setCancelled(true);
-								if(e.getCursor().getAmount() != 1) {
+								if (e.getCursor().getAmount() != 1) {
 									((Player) e.getViewers().get(0)).sendMessage(ChatColor.RED + "Please put 1 coal in at once.");
-								}else {
+								} else {
 									((Player) e.getViewers().get(0)).sendMessage(ChatColor.RED + "There is already fuel in this rocket.");
 								}
 								return;
 							}
-							e.setCursor(null);
-							e.getInventory().setItem(1, null);
+							if (e.getCursor().getAmount() == 1) {
+								e.setCursor(null);
+							}
+							Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+								@Override
+								public void run() {
+									e.getInventory().setItem(1, null);
+								}
+							});
 							((Player) e.getViewers().get(0)).updateInventory();
 							e.getView().setProperty(Property.BURN_TIME, 300);
 							e.getView().setProperty(Property.TICKS_FOR_CURRENT_FUEL, 400);
